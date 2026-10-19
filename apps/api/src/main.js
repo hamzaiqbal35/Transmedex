@@ -16,7 +16,15 @@ import { verifyMailer } from './utils/mailer.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const distPath = path.resolve(__dirname, '../../../dist/apps/web');
+
+// Candidate paths for frontend build output
+const candidateDistPaths = [
+	path.resolve(__dirname, '../../../dist/apps/web'),
+	path.resolve(__dirname, '../../web/dist'),
+	path.resolve(__dirname, '../../../dist'),
+];
+const distPath = candidateDistPaths.find(p => fs.existsSync(p)) || candidateDistPaths[0];
+const hasDist = fs.existsSync(distPath);
 
 const app = express();
 
@@ -37,20 +45,19 @@ process.on('SIGINT', async () => {
 
 process.on('SIGTERM', async () => {
 	logger.info('SIGTERM signal received');
-
 	await new Promise(resolve => setTimeout(resolve, 3000));
-
 	logger.info('Exiting');
-	process.exit();
+	process.exit(0);
 });
 
-// Configure Helmet with a conservative Content Security Policy and other security headers
+// Configure Helmet with Content Security Policy permitting Google Analytics, Fonts, and Media
 const cspDirectives = {
 	defaultSrc: ["'self'"],
-	scriptSrc: ["'self'"],
-	styleSrc: ["'self'", "'unsafe-inline'"],
-	imgSrc: ["'self'", 'data:', 'https://images.unsplash.com', 'https://horizons-cdn.hostinger.com', 'https://images.dmca.com', 'https://via.placeholder.com'],
-	connectSrc: ["'self'", 'http://localhost:3000', 'ws://localhost:3000'],
+	scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://www.googletagmanager.com", "https://www.google-analytics.com"],
+	styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+	fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
+	imgSrc: ["'self'", 'data:', 'https:', 'http:'],
+	connectSrc: ["'self'", "https://www.google-analytics.com", "https://analytics.google.com", "https://*.googletagmanager.com", 'http://localhost:3000', 'ws://localhost:3000'],
 	frameAncestors: ["'none'"],
 	baseUri: ["'self'"],
 	formAction: ["'self'"],
@@ -75,11 +82,10 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-	origin: process.env.CORS_ORIGIN,
+	origin: process.env.CORS_ORIGIN || true,
 	credentials: true,
 }));
 app.use(morgan('combined'));
-app.use(globalRateLimit);
 app.use(express.json({
 	limit: BodyLimit,
 }));
@@ -88,62 +94,69 @@ app.use(express.urlencoded({
 	limit: BodyLimit,
 }));
 
-app.use('/hcgi/api', routes());
-
-// Dev proxy to Vite dev server on port 3000 if it's running
-app.use(async (req, res, next) => {
-	if (req.path.startsWith('/hcgi/api')) {
-		return next();
-	}
-	try {
-		const targetUrl = `http://localhost:3000${req.originalUrl}`;
-		const controller = new AbortController();
-		const id = setTimeout(() => controller.abort(), 1000);
-		
-		const response = await fetch(targetUrl, {
-			method: req.method,
-			headers: req.headers,
-			signal: controller.signal,
-			duplex: req.body ? 'half' : undefined
-		});
-		clearTimeout(id);
-		
-		res.status(response.status);
-		response.headers.forEach((value, key) => {
-			if (key.toLowerCase() !== 'content-security-policy') {
-				res.setHeader(key, value);
-			}
-		});
-		const body = await response.arrayBuffer();
-		return res.send(Buffer.from(body));
-	} catch (e) {
-		next();
-	}
-});
-
-// Serve static assets from dist folder if it exists
-if (fs.existsSync(distPath)) {
-	logger.info(`Serving static files from ${distPath}`);
-	app.use(express.static(distPath));
-}
+// API Routes with rate limiting
+app.use('/hcgi/api', globalRateLimit, routes());
 
 // Health check route
 app.get('/health', (req, res) => {
-	res.json({ status: 'ok' });
+	res.json({ status: 'ok', uptime: process.uptime() });
 });
 
-// Root route to indicate the API is running
-app.get('/', (req, res) => {
-	res.send('Transmedex API is running');
-});
+// Dev proxy to Vite dev server on port 3000 ONLY in development
+if (process.env.NODE_ENV !== 'production') {
+	app.use(async (req, res, next) => {
+		if (req.path.startsWith('/hcgi/api') || req.path === '/health') {
+			return next();
+		}
+		try {
+			const targetUrl = `http://localhost:3000${req.originalUrl}`;
+			const controller = new AbortController();
+			const id = setTimeout(() => controller.abort(), 1000);
+			
+			const response = await fetch(targetUrl, {
+				method: req.method,
+				headers: req.headers,
+				signal: controller.signal,
+				duplex: req.body ? 'half' : undefined
+			});
+			clearTimeout(id);
+			
+			res.status(response.status);
+			response.headers.forEach((value, key) => {
+				if (key.toLowerCase() !== 'content-security-policy') {
+					res.setHeader(key, value);
+				}
+			});
+			const body = await response.arrayBuffer();
+			return res.send(Buffer.from(body));
+		} catch (e) {
+			next();
+		}
+	});
+}
 
-// Wildcard fallback for React routing (only if dist exists)
-if (fs.existsSync(distPath)) {
-	app.get('/{*splat}', (req, res, next) => {
-		if (req.method === 'GET' && req.accepts('html')) {
-			return res.sendFile(path.join(distPath, 'index.html'));
+// Serve static assets from dist folder if it exists
+if (hasDist) {
+	logger.info(`Serving static files from ${distPath}`);
+	app.use(express.static(distPath, {
+		index: 'index.html',
+		maxAge: process.env.NODE_ENV === 'production' ? '1d' : 0,
+	}));
+
+	// Catch-all fallback for React Router SPA (matches any GET requesting HTML)
+	app.use((req, res, next) => {
+		if (req.method === 'GET' && req.accepts('html') && !req.path.startsWith('/hcgi/api')) {
+			const indexPath = path.join(distPath, 'index.html');
+			if (fs.existsSync(indexPath)) {
+				return res.sendFile(indexPath);
+			}
 		}
 		next();
+	});
+} else {
+	logger.warn(`⚠️ Static files not found at ${distPath}. Run 'npm run build' to build the client.`);
+	app.get('/', (req, res) => {
+		res.send('Transmedex API is running. (Note: Run "npm run build" to serve the web interface)');
 	});
 }
 
@@ -153,11 +166,20 @@ app.use((req, res) => {
 	res.status(404).json({ error: 'Route not found' });
 });
 
-const port = process.env.PORT || 3001;
+const rawPort = process.env.PORT || 3001;
+const isSocket = isNaN(Number(rawPort));
 
-app.listen(port, () => {
-	logger.info(`🚀 API Server running on http://localhost:${port}`);
-	verifyMailer();
-});
+if (isSocket) {
+	app.listen(rawPort, () => {
+		logger.info(`🚀 API Server running on socket ${rawPort}`);
+		verifyMailer();
+	});
+} else {
+	const port = parseInt(rawPort, 10);
+	app.listen(port, '0.0.0.0', () => {
+		logger.info(`🚀 API Server running on http://0.0.0.0:${port}`);
+		verifyMailer();
+	});
+}
 
 export default app;

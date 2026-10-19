@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import puppeteer from 'puppeteer';
 import http from 'http';
 import { seoConfig } from '../src/data/seoConfig.js';
 
@@ -67,6 +66,14 @@ async function startServer() {
 async function prerender() {
   if (process.env.SKIP_PRERENDER === 'true' || process.env.SKIP_PRERENDER === '1') {
     console.log('SKIP_PRERENDER is set, skipping prerender process.');
+    return;
+  }
+
+  let puppeteer;
+  try {
+    puppeteer = (await import('puppeteer')).default;
+  } catch (e) {
+    console.warn('⚠️ Puppeteer is not installed in production. Skipping prerender step.');
     return;
   }
 

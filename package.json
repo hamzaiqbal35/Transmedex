@@ -1,12 +1,15 @@
 {
   "name": "monorepo",
   "version": "0.0.0",
-  "private": true,
+  "type": "module",
   "scripts": {
     "dev": "concurrently --kill-others --raw \"npm run dev --prefix apps/web\" \"npm run dev --prefix apps/api\"",
-    "build": "concurrently --raw \"npm run build --prefix apps/web\"",
-    "start": "concurrently --kill-others --raw \"npm run start --prefix apps/api\"",
+    "build": "npm run build --prefix apps/web",
+    "start": "node server.js",
     "lint": "concurrently --raw \"npm run lint --prefix apps/web\" \"npm run lint --prefix apps/api\""
+  },
+  "dependencies": {
+    "concurrently": "^9.1.2"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"

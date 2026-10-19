@@ -4,4 +4,9 @@ import dotenv from 'dotenv';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Safely load .env from project root or apps/api if present (without throwing if missing)
+dotenv.config(); // reads process.cwd()/.env
+dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
