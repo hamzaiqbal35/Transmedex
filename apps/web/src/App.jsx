@@ -60,6 +60,7 @@ const BlogTemplate = lazy(() => import('@/pages/BlogTemplate.jsx'));
 const PricingPage = lazy(() => import('@/pages/PricingPage.jsx'));
 const EHRMainPage = lazy(() => import('@/pages/EHRMainPage.jsx'));
 const StatesMainPage = lazy(() => import('@/pages/StatesMainPage.jsx'));
+const SEOToolPage = import.meta.env.DEV ? lazy(() => import('@/pages/SEOToolPage.jsx')) : () => null;
 
 function App() {
   return (
@@ -68,6 +69,14 @@ function App() {
       <SEOHead />
       <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#0da1df]"></div></div>}>
       <Routes>
+        {/* Local Dev SEO Studio — Excluded in production build */}
+        {import.meta.env.DEV && (
+          <>
+            <Route path="/admin/seo" element={<SEOToolPage />} />
+            <Route path="/seo-studio" element={<SEOToolPage />} />
+          </>
+        )}
+
         <Route path="/" element={<HomePage />} />
         <Route path="/contact" element={<ContactPage />} />
         

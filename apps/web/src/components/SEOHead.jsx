@@ -7,7 +7,15 @@ function SEOHead({ defaultTitle = 'TransMedex | Medical Billing Services Company
   const location = useLocation();
   const currentPath = location.pathname;
   
-  const pageSEO = seoConfig[currentPath] || {};
+  let pageSEO = seoConfig[currentPath] || {};
+  if (typeof window !== 'undefined') {
+    try {
+      const localOverrides = JSON.parse(localStorage.getItem('transmedex_seo_override') || '{}');
+      if (localOverrides[currentPath]) {
+        pageSEO = { ...pageSEO, ...localOverrides[currentPath] };
+      }
+    } catch (e) {}
+  }
   
   const title = pageSEO.title || defaultTitle;
   const description = pageSEO.description || defaultDescription;
@@ -32,6 +40,7 @@ function SEOHead({ defaultTitle = 'TransMedex | Medical Billing Services Company
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
       <meta name="robots" content={robots} />
+      <meta name="google-site-verification" content="j73lAYZaibOFhh8tMPZKEM5XngQc9VBoPhbb8Zmm7gU" />
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content="website" />

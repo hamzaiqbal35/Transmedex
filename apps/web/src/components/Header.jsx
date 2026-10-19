@@ -136,7 +136,7 @@ function Header() {
         {/* Animated Premium Dropdown Container */}
         <div
           className={`absolute ${alignClass} top-full pt-2 z-50 ${dropdownWidth} transition-all duration-300 origin-top-left ${
-            open ? 'opacity-100 scale-100 pointer-events-auto translate-y-0' : 'opacity-0 scale-95 pointer-events-none -translate-y-2'
+            open ? 'opacity-100 scale-100 pointer-events-auto translate-y-0 visible' : 'opacity-0 scale-95 pointer-events-none -translate-y-2 invisible'
           }`}
         >
           <div className="bg-white/95 backdrop-blur-2xl border border-slate-100 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.08)] rounded-[1.5rem] overflow-hidden">
@@ -188,7 +188,7 @@ function Header() {
 
   return (
     <>
-      <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? 'glass-header-premium py-1 shadow-[0_4px_30px_rgba(0,0,0,0.03)]' : 'bg-transparent py-3'}`}>
+      <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 max-w-full ${scrolled ? 'glass-header-premium py-1 shadow-[0_4px_30px_rgba(0,0,0,0.03)]' : 'bg-transparent py-3'}`}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
 

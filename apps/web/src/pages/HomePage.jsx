@@ -179,50 +179,50 @@ function HomePage() {
   }, [carouselApi]);
 
   return (
-    <div className="min-h-screen bg-[#f6f7ff] text-slate-950">
+    <div className="min-h-screen bg-[#f6f7ff] text-slate-950 overflow-x-hidden w-full">
 
       <Header />
 
-      <main>
+      <main className="overflow-x-hidden w-full">
         {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• HERO SECTION â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
-        <section className="relative overflow-hidden animated-gradient-bg pb-20 pt-8">
+        <section className="relative overflow-hidden animated-gradient-bg pb-16 sm:pb-20 pt-6 sm:pt-8 w-full max-w-full">
           {/* Floating decorative orbs */}
-          <div className="floating-orb w-[500px] h-[500px] bg-primary/10 -top-32 -left-32 animate-float-slow" />
-          <div className="floating-orb w-[350px] h-[350px] bg-[#591667]/8 top-60 -right-20 animate-float" />
-          <div className="floating-orb w-[200px] h-[200px] bg-[#a0357e]/6 bottom-20 left-1/3 animate-float-slow" style={{ animationDelay: '2s' }} />
+          <div className="floating-orb w-[280px] sm:w-[500px] h-[280px] sm:h-[500px] bg-primary/10 -top-32 -left-32 animate-float-slow pointer-events-none" />
+          <div className="floating-orb w-[200px] sm:w-[350px] h-[200px] sm:h-[350px] bg-[#591667]/8 top-60 -right-20 animate-float pointer-events-none" />
+          <div className="floating-orb w-[150px] sm:w-[200px] h-[150px] sm:h-[200px] bg-[#a0357e]/6 bottom-20 left-1/3 animate-float-slow pointer-events-none" style={{ animationDelay: '2s' }} />
 
-          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-10 xl:grid-cols-[0.95fr_1.05fr] items-center py-12">
+          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+            <div className="grid gap-8 lg:gap-10 lg:grid-cols-2 xl:grid-cols-[0.95fr_1.05fr] items-center py-6 sm:py-12">
               {/* Left Content */}
-              <motion.div className="space-y-8" initial="hidden" animate="visible" variants={staggerContainer}>
-                <motion.div variants={fadeInUp} className="text-sm uppercase tracking-[0.35em] text-slate-500">Medical Billing Services</motion.div>
-                <div className="space-y-6">
-                  <h1 className="text-3xl sm:text-4xl font-bold tracking-[-0.04em] text-slate-950 md:text-5xl lg:text-6xl">
+              <motion.div className="space-y-6 sm:space-y-8 min-w-0" initial="hidden" animate="visible" variants={staggerContainer}>
+                <motion.div variants={fadeInUp} className="text-xs sm:text-sm uppercase tracking-[0.25em] sm:tracking-[0.35em] text-slate-500">Medical Billing Services</motion.div>
+                <div className="space-y-4 sm:space-y-6">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold tracking-[-0.04em] text-slate-950 leading-[1.15]">
                     The Medical Billing Service <span className="gradient-text">Provider for</span> <span className="text-slate-950">USA Healthcare</span>
                   </h1>
-                  <p className="max-w-xl text-lg leading-8 text-slate-600">
+                  <p className="max-w-xl text-base sm:text-lg leading-7 sm:leading-8 text-slate-600">
                     TransMedex is the USA's top medical billing firm – deploying the best practices in medical billing and coding for physicians looking to outsource billing and coding to an expert 3rd party billing agency.
                   </p>
-                  <p className="max-w-xl text-lg leading-8 text-slate-600">
+                  <p className="max-w-xl text-base sm:text-lg leading-7 sm:leading-8 text-slate-600">
                     Our certified medical coders and billers help healthcare organizations recover Aged Receivables and resolve insurance Claim Denials, as well.
                   </p>
                 </div>
 
-                <motion.div variants={fadeInUp} className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 text-sm font-semibold text-slate-800">
-                  <div className="flex items-center gap-2"><CheckCircle className="h-5 w-5 text-emerald-500" /> 40+ Specialties Billed Daily</div>
-                  <div className="flex items-center gap-2"><CheckCircle className="h-5 w-5 text-emerald-500" /> ISO 27001 + HIPAA Certified</div>
-                  <div className="flex items-center gap-2"><CheckCircle className="h-5 w-5 text-emerald-500" /> 20% Average Revenue Increase</div>
-                  <div className="flex items-center gap-2"><CheckCircle className="h-5 w-5 text-emerald-500" /> AI Agents Work Claims 24/7</div>
+                <motion.div variants={fadeInUp} className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 sm:gap-y-4 gap-x-6 sm:gap-x-8 text-xs sm:text-sm font-semibold text-slate-800">
+                  <div className="flex items-center gap-2"><CheckCircle className="h-5 w-5 text-emerald-500 shrink-0" /> <span>40+ Specialties Billed Daily</span></div>
+                  <div className="flex items-center gap-2"><CheckCircle className="h-5 w-5 text-emerald-500 shrink-0" /> <span>ISO 27001 + HIPAA Certified</span></div>
+                  <div className="flex items-center gap-2"><CheckCircle className="h-5 w-5 text-emerald-500 shrink-0" /> <span>20% Average Revenue Increase</span></div>
+                  <div className="flex items-center gap-2"><CheckCircle className="h-5 w-5 text-emerald-500 shrink-0" /> <span>AI Agents Work Claims 24/7</span></div>
                 </motion.div>
 
 
               </motion.div>
 
               {/* Right — Hero Image */}
-              <motion.div className="relative" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}>
-                <div className="absolute -right-16 top-10 h-[440px] w-[440px] rounded-full bg-gradient-to-br from-primary/25 to-[#591667]/10 blur-3xl animate-pulse-glow" />
-                <div className="relative overflow-hidden rounded-3xl border border-slate-200/60 shadow-2xl shadow-primary/10" style={{ borderRadius: '1.5rem', overflow: 'hidden' }}>
-                  <img src="/hero-image.webp" alt="Medical billing team" width="665" height="370" className="h-[300px] md:h-[420px] w-full rounded-3xl object-cover block" style={{ borderRadius: '1.5rem' }} fetchpriority="high" loading="eager" decoding="async" />
+              <motion.div className="relative min-w-0 w-full" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}>
+                <div className="absolute -right-8 sm:-right-16 top-10 h-[280px] sm:h-[440px] w-[280px] sm:w-[440px] rounded-full bg-gradient-to-br from-primary/25 to-[#591667]/10 blur-3xl animate-pulse-glow pointer-events-none" />
+                <div className="relative overflow-hidden rounded-3xl border border-slate-200/60 shadow-2xl shadow-primary/10 w-full" style={{ borderRadius: '1.5rem', overflow: 'hidden' }}>
+                  <img src="/hero-image.webp" alt="Medical billing team" width="665" height="370" className="h-[240px] sm:h-[320px] md:h-[380px] lg:h-[400px] xl:h-[420px] w-full rounded-3xl object-cover block" style={{ borderRadius: '1.5rem' }} fetchpriority="high" loading="eager" decoding="async" />
                 </div>
               </motion.div>
             </div>
@@ -231,7 +231,7 @@ function HomePage() {
         </section>
 
         {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• SPECIALTIES SECTION â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
-        <section className="bg-white py-24">
+        <section className="bg-white py-16 sm:py-24 overflow-hidden w-full">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <motion.div className="text-center mb-14" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}>
               <h2 className="text-3xl font-bold tracking-[-0.03em] text-slate-950">Medical Specialties We Serve</h2>
@@ -267,7 +267,7 @@ function HomePage() {
         </section>
 
         {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• EMR SECTION â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
-        <section className="bg-slate-50 pt-24 pb-16">
+        <section className="bg-slate-50 pt-16 sm:pt-24 pb-12 sm:pb-16 overflow-hidden w-full">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <motion.div className="text-center mb-14" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}>
               <h2 className="text-3xl font-bold tracking-[-0.03em] text-slate-950">EMR Platforms We Support</h2>
@@ -297,7 +297,7 @@ function HomePage() {
         </section>
 
         {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• TRUST RIBBON â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
-        <section className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-50">
+        <section className="py-10 sm:py-12 px-4 sm:px-6 lg:px-8 bg-slate-50 overflow-hidden w-full">
           <motion.div className="mx-auto max-w-7xl grid gap-4 sm:grid-cols-3" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
             {['500+ Satisfied Providers', 'Serving More Than 25 Specialties', '150+ Billing and Coding Experts'].map((text, idx) => (
               <motion.div key={idx} variants={scaleIn} className="rounded-3xl gradient-bg-rich px-6 py-6 text-white shadow-xl hover:shadow-[0_16px_40px_-8px_rgba(131,45,112,0.4)] transition-shadow duration-300">
@@ -308,7 +308,7 @@ function HomePage() {
         </section>
 
         {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• STATS SECTION â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
-        <section className="bg-white py-24">
+        <section className="bg-white py-16 sm:py-24 overflow-hidden w-full">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <motion.div className="text-center" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}>
               <h2 className="text-3xl font-bold tracking-[-0.03em] text-slate-950">Our Success in Numbers</h2>
@@ -332,7 +332,7 @@ function HomePage() {
         </section>
 
         {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• SERVICES SECTION â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
-        <section className="bg-slate-50 py-24">
+        <section className="bg-slate-50 py-16 sm:py-24 overflow-hidden w-full">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <motion.div className="text-center" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}>
               <h2 className="text-3xl font-bold tracking-[-0.03em] text-slate-950">Medical Billing Services We Provide</h2>
@@ -362,7 +362,7 @@ function HomePage() {
         </section>
 
         {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• CAROUSEL SECTION â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
-        <section className="bg-[#eef0ff] py-24">
+        <section className="bg-[#eef0ff] py-16 sm:py-24 overflow-hidden w-full">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <motion.div className="flex items-center justify-between gap-6 mb-10" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
               <div>
@@ -390,25 +390,25 @@ function HomePage() {
                   );
                 })}
               </CarouselContent>
-              <CarouselPrevious className="hidden md:inline-flex border-slate-300 bg-white/90 text-slate-900 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300" />
-              <CarouselNext className="hidden md:inline-flex border-slate-300 bg-white/90 text-slate-900 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300" />
+              <CarouselPrevious className="hidden md:inline-flex -left-2 sm:-left-4 xl:-left-12 border-slate-300 bg-white/90 text-slate-900 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300" />
+              <CarouselNext className="hidden md:inline-flex -right-2 sm:-right-4 xl:-right-12 border-slate-300 bg-white/90 text-slate-900 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300" />
             </Carousel>
           </div>
         </section>
 
         {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• CLAIMS BILLING DARK SECTION â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
-        <section className="relative bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] py-24 text-white overflow-hidden">
+        <section className="relative bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] py-16 sm:py-24 text-white overflow-hidden w-full">
           <div className="absolute inset-0 opacity-30">
             <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#0da1df]/30 rounded-full blur-[120px]" />
             <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-[#0369a1]/20 rounded-full blur-[100px]" />
           </div>
 
-          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-14 xl:grid-cols-[0.95fr_1.05fr] items-center">
-              <motion.div className="space-y-8" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}>
-                <motion.p variants={fadeInUp} className="text-sm uppercase tracking-[0.32em] text-white/50">Medical Claims Billing Service.</motion.p>
-                <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl font-bold tracking-[-0.03em]">We boost healthcare income with quick, uncut reimbursements!</motion.h2>
-                <motion.div variants={fadeInUp} className="space-y-4 text-slate-300">
+          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+            <div className="grid gap-10 lg:gap-14 lg:grid-cols-2 xl:grid-cols-[0.95fr_1.05fr] items-center">
+              <motion.div className="space-y-6 sm:space-y-8 min-w-0" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}>
+                <motion.p variants={fadeInUp} className="text-xs sm:text-sm uppercase tracking-[0.25em] sm:tracking-[0.32em] text-white/50">Medical Claims Billing Service.</motion.p>
+                <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-[-0.03em]">We boost healthcare income with quick, uncut reimbursements!</motion.h2>
+                <motion.div variants={fadeInUp} className="space-y-4 text-slate-300 text-sm sm:text-base">
                   <p>Management of billing claims poses difficulties for providers pursuing timely submissions and full remittance for care given. But take heart — our niche medical billing services ease the way.</p>
                   <p>We optimize each invoicing phase, armed with clinical knowledge and zeal for first-class claims processing. Cloud tech validates a patient's insurance eligibility right away and file claims electronically to quicken payments.</p>
                 </motion.div>
@@ -420,9 +420,9 @@ function HomePage() {
                     { title: 'Instant claim submission', desc: 'Electronic billing service files claims instantly.' },
                     { title: 'Claim follow-up & resolution', desc: 'Denied claims are appealed and reprocessed successfully.' },
                   ].map((item, idx) => (
-                    <div key={idx} className="rounded-3xl border border-white/10 bg-white/5 p-6 hover:bg-white/10 transition-colors duration-300">
-                      <p className="text-sm uppercase tracking-[0.24em] text-primary-foreground">{item.title}</p>
-                      <p className="mt-3 text-sm leading-6 text-slate-300">{item.desc}</p>
+                    <div key={idx} className="rounded-3xl border border-white/10 bg-white/5 p-5 sm:p-6 hover:bg-white/10 transition-colors duration-300">
+                      <p className="text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.24em] text-primary-foreground font-semibold">{item.title}</p>
+                      <p className="mt-2 sm:mt-3 text-xs sm:text-sm leading-5 sm:leading-6 text-slate-300">{item.desc}</p>
                     </div>
                   ))}
                 </motion.div>
@@ -430,8 +430,8 @@ function HomePage() {
 
               </motion.div>
 
-              <motion.div className="relative overflow-hidden rounded-[2rem] bg-white p-3 sm:p-4 shadow-2xl border border-slate-200/80" initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+              <motion.div className="relative overflow-hidden rounded-[2rem] bg-white p-3 sm:p-4 shadow-2xl border border-slate-200/80 min-w-0 w-full" initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2.5">
                   {[
                     {
                       date: '06/01/2026',
@@ -516,16 +516,16 @@ function HomePage() {
         </section>
 
         {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• WHY CHOOSE US â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
-        <section className="bg-slate-50 py-20">
+        <section className="bg-slate-50 py-16 sm:py-20 overflow-hidden w-full">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <motion.div className="rounded-[2rem] gradient-bg-rich p-6 sm:p-8 md:p-12 text-white shadow-2xl shadow-primary/20" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-              <div className="grid gap-12 xl:grid-cols-[1fr_1.2fr]">
-                <div>
-                  <h2 className="text-3xl sm:text-4xl font-bold">Why Choose TransMedex?</h2>
-                  <p className="mt-6 text-lg leading-8 text-slate-200">Thousands of specialty practices trust us to handle billing so they can focus on care. Here's what sets us apart.</p>
-                  <Link to="/contact" className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#0da1df] font-semibold hover:bg-slate-100 hover:shadow-lg transition-all duration-300">Contact Us <ArrowRight className="h-4 w-4" /></Link>
+              <div className="grid gap-8 sm:gap-12 lg:grid-cols-2 xl:grid-cols-[1fr_1.2fr] items-center">
+                <div className="min-w-0">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Why Choose TransMedex?</h2>
+                  <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-7 sm:leading-8 text-slate-200">Thousands of specialty practices trust us to handle billing so they can focus on care. Here's what sets us apart.</p>
+                  <Link to="/contact" className="mt-6 sm:mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#0da1df] font-semibold hover:bg-slate-100 hover:shadow-lg transition-all duration-300">Contact Us <ArrowRight className="h-4 w-4" /></Link>
                 </div>
-                <div className="space-y-4">
+                <div className="space-y-4 min-w-0">
                   {[
                     { title: 'Specialty-specific billing expertise', desc: 'Medical billing for cardiology, nephrology, orthopedics, and 70+ other specialties' },
                     { title: '99% claim accuracy with 24/7 support', desc: 'Near-perfect clean claim rates with dedicated support teams and instant claim resolution' },
@@ -546,7 +546,7 @@ function HomePage() {
         </section>
 
         {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• AWARDS / TRUST SECTION â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
-        <section className="bg-[#eef0ff] py-24">
+        <section className="bg-[#eef0ff] py-16 sm:py-24 overflow-hidden w-full">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <motion.div className="text-center" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
               <h2 className="text-3xl font-bold tracking-[-0.03em] text-slate-950">Trust Your Billing To The Company That Ranks Among "The Best Medical Billing Companies"</h2>
@@ -567,10 +567,10 @@ function HomePage() {
         </section>
 
         {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• USA BILLING SECTION â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
-        <section className="bg-white py-24">
+        <section className="bg-white py-16 sm:py-24 overflow-hidden w-full">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-12 xl:grid-cols-[0.65fr_0.35fr] items-center">
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}>
+            <div className="grid gap-8 sm:gap-12 lg:grid-cols-2 xl:grid-cols-[0.65fr_0.35fr] items-center">
+              <motion.div className="min-w-0" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}>
                 <motion.p variants={fadeInUp} className="text-sm uppercase tracking-[0.32em] text-primary">Medical Billing Service in the USA that Unites Tech & Expertise to Meet Every Doctor's Vision</motion.p>
                 <motion.h2 variants={fadeInUp} className="mt-4 text-3xl sm:text-4xl font-bold text-slate-950">Our USA-based healthcare revenue cycle management company helps individual and institutional providers navigate the tight spots of patient billing and coding via modern medical billing services.</motion.h2>
                 <motion.p variants={fadeInUp} className="mt-6 text-lg leading-8 text-slate-600">Our tailored medical billing services boost reimbursements through specialty-focused billing teams adept at ICD-10 coding rules and protocols unique to your medical niche.</motion.p>
@@ -585,7 +585,7 @@ function HomePage() {
                 </motion.div>
               </motion.div>
 
-              <div className="grid gap-6">
+              <div className="grid gap-6 min-w-0">
                 <motion.div className="rounded-[2rem] border border-slate-200 bg-white p-8 text-center shadow-sm hover-lift" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
                   <p className="text-sm uppercase tracking-[0.24em] text-primary">Happiness Score</p>
                   <p className="mt-4 text-5xl font-bold gradient-text">92%</p>
@@ -604,19 +604,19 @@ function HomePage() {
         </section>
 
         {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• CTA BANNER â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
-        <section className="bg-[#eef0ff] py-24">
+        <section className="bg-[#eef0ff] py-16 sm:py-24 overflow-hidden w-full">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <motion.div className="rounded-[2rem] gradient-bg-rich p-6 sm:p-8 md:p-12 text-white shadow-2xl shadow-primary/20 relative overflow-hidden" initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
               <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-[80px]" />
               <div className="absolute bottom-0 left-0 w-60 h-60 bg-white/3 rounded-full blur-[60px]" />
 
-              <div className="relative grid gap-10 xl:grid-cols-[1fr_0.9fr] items-center">
-                <div>
-                  <p className="text-sm uppercase tracking-[0.32em] text-white/60">Lets experience our medical billing services for as low as 2.49%</p>
-                  <h2 className="mt-4 text-3xl sm:text-4xl font-bold">Over 1500 medical practices trust TransMedex medical billing services company. So let's have a chat.</h2>
-                  <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200">Patient's insurance coverage verification on the spot. HIPAA-compliant medical billing services for data safety. 24/7 medical billing services to handle every claim submission. 98% claim reimbursement rate for healthy cash flow.</p>
+              <div className="relative grid gap-8 sm:gap-10 lg:grid-cols-2 xl:grid-cols-[1fr_0.9fr] items-center">
+                <div className="min-w-0">
+                  <p className="text-xs sm:text-sm uppercase tracking-[0.25em] sm:tracking-[0.32em] text-white/60">Lets experience our medical billing services for as low as 2.49%</p>
+                  <h2 className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-4xl font-bold">Over 1500 medical practices trust TransMedex medical billing services company. So let's have a chat.</h2>
+                  <p className="mt-4 sm:mt-6 max-w-2xl text-base sm:text-lg leading-7 sm:leading-8 text-slate-200">Patient's insurance coverage verification on the spot. HIPAA-compliant medical billing services for data safety. 24/7 medical billing services to handle every claim submission. 98% claim reimbursement rate for healthy cash flow.</p>
                 </div>
-                <div className="space-y-4">
+                <div className="space-y-4 min-w-0">
 
                   <div className="grid gap-3 rounded-3xl border border-white/10 bg-white/5 p-6 text-sm text-slate-200">
                     {['Billing Software', 'Denial Management', 'Accounts Management', '1:1 Technical Support'].map((item, idx) => (
@@ -630,47 +630,47 @@ function HomePage() {
         </section>
 
         {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• DEDICATED ACCOUNTS SECTION â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
-        <section className="bg-white py-24">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-12 xl:grid-cols-[0.95fr_1.05fr] items-center">
-              <motion.div className="space-y-8" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}>
-                <motion.p variants={fadeInUp} className="text-sm uppercase tracking-[0.32em] text-primary">Dedicated Accounts Managers & Expert Medical Billers for Health Centers</motion.p>
-                <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl font-bold text-slate-950">Healthcare organizations are at the heart of our medical billing and collections team.</motion.h2>
-                <motion.p variants={fadeInUp} className="text-lg leading-8 text-slate-600">From primary care physicians to specialty clinics, our dedicated clinical coding officers and claims examiners implement a precision-driven approach so that revenue flows smoothly and claim denials fade away.</motion.p>
+        <section className="bg-white py-16 sm:py-24 overflow-hidden w-full">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+            <div className="grid gap-8 sm:gap-12 lg:grid-cols-2 xl:grid-cols-[0.95fr_1.05fr] items-center">
+              <motion.div className="space-y-6 sm:space-y-8 min-w-0" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}>
+                <motion.p variants={fadeInUp} className="text-xs sm:text-sm uppercase tracking-[0.25em] sm:tracking-[0.32em] text-primary">Dedicated Accounts Managers & Expert Medical Billers for Health Centers</motion.p>
+                <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-950">Healthcare organizations are at the heart of our medical billing and collections team.</motion.h2>
+                <motion.p variants={fadeInUp} className="text-base sm:text-lg leading-7 sm:leading-8 text-slate-600">From primary care physicians to specialty clinics, our dedicated clinical coding officers and claims examiners implement a precision-driven approach so that revenue flows smoothly and claim denials fade away.</motion.p>
 
-                <motion.div variants={fadeInUp} className="mt-10 grid gap-4">
-                  <div className="rounded-3xl border border-red-200 bg-red-50/50 p-6">
-                    <p className="font-semibold text-rose-600">Traditional agencies have a 50% failure rate with provider credentialing and patient billing.</p>
+                <motion.div variants={fadeInUp} className="mt-8 sm:mt-10 grid gap-4">
+                  <div className="rounded-3xl border border-red-200 bg-red-50/50 p-5 sm:p-6">
+                    <p className="font-semibold text-rose-600 text-sm sm:text-base">Traditional agencies have a 50% failure rate with provider credentialing and patient billing.</p>
                   </div>
-                  <div className="rounded-3xl border border-emerald-200 bg-emerald-50/50 p-6">
-                    <p className="font-semibold text-slate-950">TransMedex medical billing organization has a 97% pass rate with support for denied claims as well.</p>
+                  <div className="rounded-3xl border border-emerald-200 bg-emerald-50/50 p-5 sm:p-6">
+                    <p className="font-semibold text-slate-950 text-sm sm:text-base">TransMedex medical billing organization has a 97% pass rate with support for denied claims as well.</p>
                   </div>
                 </motion.div>
 
                 <motion.div variants={fadeInUp}>
-                  <Button className="mt-8 rounded-full gradient-bg hover:gradient-bg-hover px-8 py-4 text-base font-semibold text-white shadow-lg hover:shadow-[0_12px_28px_-6px_rgba(131,45,112,0.4)] transition-all duration-300 border-none">Claim Free Practice Audit</Button>
+                  <Button className="mt-6 sm:mt-8 rounded-full gradient-bg hover:gradient-bg-hover px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold text-white shadow-lg hover:shadow-[0_12px_28px_-6px_rgba(131,45,112,0.4)] transition-all duration-300 border-none">Claim Free Practice Audit</Button>
                 </motion.div>
               </motion.div>
 
-              <motion.div className="relative overflow-hidden rounded-3xl border border-slate-100 shadow-xl" style={{ borderRadius: '1.5rem', overflow: 'hidden' }} initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
-                <img src="\WhatsApp Image 2026-08-06 at 00.55.00.jpeg" alt="Medical professionals" width="408" height="602" className="h-[300px] md:h-[520px] w-full rounded-3xl object-cover block" style={{ borderRadius: '1.5rem' }} loading="lazy" decoding="async" />
+              <motion.div className="relative overflow-hidden rounded-3xl border border-slate-100 shadow-xl min-w-0 w-full" style={{ borderRadius: '1.5rem', overflow: 'hidden' }} initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+                <img src="/WhatsApp Image 2026-08-06 at 00.55.00.jpeg" alt="Medical professionals" width="408" height="602" className="h-[260px] sm:h-[360px] md:h-[480px] lg:h-[520px] w-full rounded-3xl object-cover block" style={{ borderRadius: '1.5rem' }} loading="lazy" decoding="async" />
               </motion.div>
             </div>
           </div>
         </section>
 
         {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• CHALLENGES + FORM SECTION â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
-        <section className="bg-[#eef0ff] py-24">
+        <section className="bg-[#eef0ff] py-16 sm:py-24 overflow-hidden w-full">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <motion.div className="rounded-[2rem] bg-gradient-to-br from-[#0f172a] via-[#0369a1] to-[#0da1df] p-5 sm:p-8 md:p-10 text-white shadow-2xl shadow-primary/20 relative overflow-hidden" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
               <div className="absolute top-0 right-1/4 w-64 h-64 bg-white/5 rounded-full blur-[80px]" />
 
-              <div className="relative grid gap-10 xl:grid-cols-[0.7fr_1.3fr] items-center">
-                <div>
-                  <h2 className="text-3xl sm:text-4xl font-bold">Which of these challenges are you facing as a provider?</h2>
-                  <p className="mt-4 text-base leading-7 text-slate-200">We solve the problems that hold providers back: aging receivables, denial follow-up, credentialing delays, and unclear revenue reporting.</p>
+              <div className="relative grid gap-8 sm:gap-10 lg:grid-cols-2 xl:grid-cols-[0.7fr_1.3fr] items-center">
+                <div className="min-w-0">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Which of these challenges are you facing as a provider?</h2>
+                  <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-6 sm:leading-7 text-slate-200">We solve the problems that hold providers back: aging receivables, denial follow-up, credentialing delays, and unclear revenue reporting.</p>
                 </div>
-                <div className="space-y-4 rounded-[1.75rem] border border-white/10 bg-white/5 p-8">
+                <div className="space-y-4 rounded-[1.75rem] border border-white/10 bg-white/5 p-6 sm:p-8 min-w-0">
                   {challenges.map((challenge, idx) => (
                     <div key={idx} className="flex items-start gap-3 group">
                       <div className="mt-1.5 h-2.5 w-2.5 rounded-full bg-white/60 group-hover:bg-white group-hover:shadow-[0_0_8px_rgba(255,255,255,0.4)] transition-all duration-300 flex-shrink-0" />

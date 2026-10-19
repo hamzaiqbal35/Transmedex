@@ -4,7 +4,7 @@ import { Instagram, Linkedin, MapPin, Phone, Mail } from 'lucide-react';
 
 function Footer() {
   return (
-    <footer className="bg-gradient-to-r from-[#0f172a] to-[#1e293b] text-white pt-16 pb-6">
+    <footer className="bg-gradient-to-r from-[#0f172a] to-[#1e293b] text-white pt-16 pb-6 overflow-hidden w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 lg:gap-6 xl:gap-8">
 
