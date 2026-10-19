@@ -191,10 +191,31 @@ ${routes.map(route => `  <url>
   console.log('Saved sitemap.xml to build and public directories.');
 }
 
+async function syncToRootDist() {
+  const rootDist = path.resolve(__dirname, '../../../dist');
+  const webDist = path.resolve(__dirname, '../../../dist/apps/web');
+
+  if (fs.existsSync(webDist)) {
+    try {
+      const items = fs.readdirSync(webDist);
+      for (const item of items) {
+        if (item === 'apps') continue;
+        const src = path.join(webDist, item);
+        const dest = path.join(rootDist, item);
+        fs.cpSync(src, dest, { recursive: true, force: true });
+      }
+      console.log('✓ Synchronized build files directly to root dist/ directory');
+    } catch (err) {
+      console.warn('Notice: could not mirror to root dist:', err.message);
+    }
+  }
+}
+
 async function run() {
   await generateSitemap();
   await prerender();
-  console.log('Prerendering and sitemap generation complete!');
+  await syncToRootDist();
+  console.log('Prerendering, sitemap, and dist sync complete!');
 }
 
 run();
