@@ -222,7 +222,7 @@ function HomePage() {
               <motion.div className="relative min-w-0 w-full" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}>
                 <div className="absolute -right-8 sm:-right-16 top-10 h-[280px] sm:h-[440px] w-[280px] sm:w-[440px] rounded-full bg-gradient-to-br from-primary/25 to-[#591667]/10 blur-3xl animate-pulse-glow pointer-events-none" />
                 <div className="relative overflow-hidden rounded-3xl border border-slate-200/60 shadow-2xl shadow-primary/10 w-full" style={{ borderRadius: '1.5rem', overflow: 'hidden' }}>
-                  <img src="/hero-image.webp" alt="Medical billing team" width="665" height="370" className="h-[240px] sm:h-[320px] md:h-[380px] lg:h-[400px] xl:h-[420px] w-full rounded-3xl object-cover block" style={{ borderRadius: '1.5rem' }} fetchpriority="high" loading="eager" decoding="async" />
+                  <img src="/hero-image.webp" alt="Medical billing team" width="665" height="370" className="h-[240px] sm:h-[320px] md:h-[380px] lg:h-[400px] xl:h-[420px] w-full rounded-3xl object-cover block" style={{ borderRadius: '1.5rem' }} fetchPriority="high" loading="eager" decoding="async" />
                 </div>
               </motion.div>
             </div>
